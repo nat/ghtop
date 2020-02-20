@@ -20,7 +20,7 @@ def get_token():
 
 def fetch_events():
     request = urllib.request.Request(url)
-    request.add_header('Authorization', 'token %s' % get_token())
+    request.add_header('Authorization', 'token %s' % str.strip(get_token()))
     response = urllib.request.urlopen(request)
     remaining_apis = int(response.headers['X-RateLimit-Remaining'])
     if remaining_apis < 1000:
