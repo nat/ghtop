@@ -1,6 +1,8 @@
 #!/usr/local/bin/python3
 
 import time
+import datetime
+import dateutil
 import json
 import sys
 import shutil
@@ -51,6 +53,8 @@ def read_json_log(logfile):
 printed_event_ids = {}
 
 def print_event(e, commits_counter):
+
+    ts = dateutil.parser(e["created_at"])
 
     if e["id"] in printed_event_ids:
         return
@@ -120,9 +124,9 @@ commits = manager.counter(desc='Commits', unit='commits', color='green')
 def tail_events():
     while True:
         events = fetch_events()
-        #log = read_json_log(logfile)
-        #combined = log + events
-        #write_logs(combined)
+        log = read_json_log(logfile)
+        combined = log + events
+        write_logs(combined)
         for x in events:
             print_event(x, commits)
         time.sleep(0.2)
@@ -205,7 +209,7 @@ def watch_users():
         sorted_users = sorted(users.items(), key = lambda kv: (kv[1], kv[0]), reverse=True)
         for i in range(20):
             u = sorted_users[i]
-            print("%s %s %s" % (str(u[1]).ljust(6), u[0].ljust(30), str(users_events[u[0]])))
+            print("%s %s %s" % (str(u[1]).ljust(6), u[0].ljust(30), ','.join(users_events[u[0]])))
         time.sleep(1)
 
 def push_to_log(e):
@@ -294,4 +298,10 @@ def quad_logs():
         ui.display()
         time.sleep(0.1)
 
-quad_logs()
+def simple():
+    while True:
+        events = fetch_events()
+        for x in events:
+            print("%s %s %s" % (x["actor"]["login"], x["type"], x["repo"]["name"]))
+
+tail_events()
