@@ -8,6 +8,7 @@ import urllib.request
 import enlighten
 import blessed
 import emoji
+from dashing import *
 
 term = blessed.Terminal()
 
@@ -116,11 +117,181 @@ def write_logs(events):
 manager = enlighten.get_manager()
 commits = manager.counter(desc='Commits', unit='commits', color='green')
 
-while True:
-    events = fetch_events()
-    #log = read_json_log(logfile)
-    #combined = log + events
-    #write_logs(combined)
-    for x in events:
-        print_event(x, commits)
-    time.sleep(0.2)
+def tail_events():
+    while True:
+        events = fetch_events()
+        #log = read_json_log(logfile)
+        #combined = log + events
+        #write_logs(combined)
+        for x in events:
+            print_event(x, commits)
+        time.sleep(0.2)
+
+EVENT_EMOJI_MAPPING = {
+    'CheckRunEvent': '::',
+    'CheckSuiteEvent': '::',
+    'CommitCommentEvent': '::',
+    'ContentReferenceEvent': '::',
+    'CreateEvent': ':new:',
+    'DeleteEvent': ':x:',
+    'DeployKeyEvent': '::',
+    'DeploymentEvent': ':rocket:',
+    'DeploymentStatusEvent': '::',
+    'DownloadEvent': '::',
+    'FollowEvent': '::',
+    'ForkEvent': ':fork_and_knife:',
+    'ForkApplyEvent': '::',
+    'GitHubAppAuthorizationEvent': '::',
+    'GistEvent': ':notepad:',
+    'GollumEvent': '::',
+    'InstallationEvent': '::',
+    'InstallationRepositoriesEvent': '::',
+    'IssueCommentEvent': ':speech_bubble:',
+    'IssuesEvent': '::',
+    'LabelEvent': ':label:',
+    'MarketplacePurchaseEvent': '::',
+    'MemberEvent': '::',
+    'MembershipEvent': '::',
+    'MetaEvent': '::',
+    'MilestoneEvent': '::',
+    'OrganizationEvent': '::',
+    'OrgBlockEvent': '::',
+    'PackageEvent': '::',
+    'PageBuildEvent': '::',
+    'ProjectCardEvent': '::',
+    'ProjectColumnEvent': '::',
+    'ProjectEvent': '::',
+    'PublicEvent': '::',
+    'PullRequestEvent': '::',
+    'PullRequestReviewEvent': '::',
+    'PullRequestReviewCommentEvent': '::',
+    'PushEvent': ':fist:',
+    'ReleaseEvent': ':rocket:',
+    'RepositoryDispatchEvent': '::',
+    'RepositoryEvent': '::',
+    'RepositoryImportEvent': '::',
+    'RepositoryVulnerabilityAlertEvent': '::',
+    'SecurityAdvisoryEvent': '::',
+    'SponsorshipEvent': '::',
+    'StarEvent': ':star:',
+    'StatusEvent': '::',
+    'TeamEvent': '::',
+    'TeamAddEvent': '::',
+    'WatchEvent': ':eyes:' }
+
+def event_to_emoji(e):
+    if EVENT_EMOJI_MAPPING[e["type"]] == '::':
+        return e["type"]
+    return emoji.emojize(EVENT_EMOJI_MAPPING[e["type"]], use_aliases=True)
+
+def watch_users():
+    users = {}
+    users_events = {}
+    while True:
+        events = fetch_events()
+        for x in events:
+            login = x["actor"]["login"]
+            if login in users:
+                users[login] += 1
+            else:
+                users[login] = 1
+            if login in users_events:
+                users_events[login].insert(0, event_to_emoji(x))
+            else:
+                users_events[login] = []
+                users_events[login].append(event_to_emoji(x))
+        print (term.clear())
+
+        sorted_users = sorted(users.items(), key = lambda kv: (kv[1], kv[0]), reverse=True)
+        for i in range(20):
+            u = sorted_users[i]
+            print("%s %s %s" % (str(u[1]).ljust(6), u[0].ljust(30), str(users_events[u[0]])))
+        time.sleep(1)
+
+def push_to_log(e):
+    login = e["actor"]["login"]
+    repo = e["repo"]["name"]
+
+    return "%s pushed %d commits to repo %s" % (login, len(e["payload"]["commits"]), repo)
+
+def issue_to_log(e):
+
+    login = e["actor"]["login"]
+    repo = e["repo"]["name"]
+
+    if e["type"] == "IssuesEvent":
+        action = e["payload"]["action"]
+        issue = e["payload"]["issue"]
+
+        if action == 'closed':
+            return emoji.emojize(':star:', use_aliases=True) + ' '  + login + ' closed issue #' + str(issue["number"]) + " on repo " + repo[:22] + " (\"" +  issue["title"][:50] + "...\")"
+        elif action == 'opened':
+            return emoji.emojize(':closed_mailbox_with_raised_flag:', use_aliases=True) + ' '  + login + ' opened issue #' + str(issue["number"]) + " on repo " + repo[:22] + " (\"" +  issue["title"][:50] + "...\")"
+
+    elif e["type"] == "IssueCommentEvent":
+        issue = e["payload"]["issue"]
+        return emoji.emojize(':speech_balloon: ') + login + " commented on issue #" + str(issue["number"]) + " on repo " + repo[:22] + " (\"" +  issue["title"][:50] + "...\")"
+
+def pr_to_log(e):
+    login = e["actor"]["login"]
+    repo = e["repo"]["name"]
+
+    action = e["payload"]["action"]
+    pr_emoji = ''
+    pr_color = None
+    if action == "closed":
+        pr_emoji = emoji.emojize(":white_heavy_check_mark:")
+    else:
+        pr_emoji = emoji.emojize(":sparkles:")
+    return pr_emoji + ' ' + login + " " + e["payload"]["action"] + " a pull request on repo " + repo[:20] + " (\"" +  e["payload"]["pull_request"]["title"][:50] + "...\")"
+
+def release_to_log(e):
+    login = e["actor"]["login"]
+    repo = e["repo"]["name"]
+
+    tag = e["payload"]["release"]["tag_name"]
+    return emoji.emojize(':rocket: ') + login + " released " + tag + " of " + repo
+
+def str_clean(s):
+    return s[:120]
+
+def quad_logs():
+    ui = HSplit(
+            VSplit(
+                Log(title='Issues', border_color = 2, color=7),
+                Log(title='Commits', border_color = 2, color=3)
+            ),
+            VSplit(
+                Log(title='Pull Requests', border_color = 2, color=4),
+                Log(title='Releases', border_color = 2, color=5)
+            ),
+        )
+
+    issues = ui.items[0].items[0]
+    commits = ui.items[0].items[1]
+    prs = ui.items[1].items[0]
+    releases = ui.items[1].items[1]
+
+    issues.append(" ")
+    commits.append(" ")
+    prs.append(" ")
+    releases.append(" ")
+
+    while True:
+        events = fetch_events()
+
+        for x in events:
+            t = x["type"]
+            if t == 'PushEvent':
+                commits.append(str_clean(push_to_log(x)))
+            elif t == 'IssuesEvent' or t == 'IssueCommentEvent':
+                issues.append(str_clean(issue_to_log(x)))
+            elif t == 'PullRequestEvent':
+                prs.append(str_clean(pr_to_log(x)))
+            elif t == 'ReleaseEvent':
+                releases.append(str_clean(release_to_log(x)))
+
+        ui.display()
+        time.sleep(0.1)
+
+quad_logs()
