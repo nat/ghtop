@@ -50,7 +50,6 @@ def read_json_log(logfile):
 printed_event_ids = {}
 
 def print_event(e, commits_counter):
-    #print e["type"]
 
     if e["id"] in printed_event_ids:
         return
@@ -58,6 +57,8 @@ def print_event(e, commits_counter):
 
     login = e["actor"]["login"]
     repo = e["repo"]["name"]
+
+    #print(e["type"], login, repo)
 
     # Don't print bot activity (there is a lot!)
     if "bot" in login:
@@ -70,8 +71,15 @@ def print_event(e, commits_counter):
         return
     elif e["type"] == "ForkEvent":
         return
-    elif e["type"] == "IssueEvent":
-        return
+    elif e["type"] == "IssuesEvent":
+        action = e["payload"]["action"]
+        issue = e["payload"]["issue"]
+
+        if action == 'closed':
+            print(emoji.emojize(':star:', use_aliases=True) + ' '  + login + ' closed issue #' + str(issue["number"]) + " on repo " + repo[:22] + " (\"" +  issue["title"][:50] + "...\")")
+        elif action == 'opened':
+            print(emoji.emojize(':closed_mailbox_with_raised_flag:', use_aliases=True) + ' '  + login + ' opened issue #' + str(issue["number"]) + " on repo " + repo[:22] + " (\"" +  issue["title"][:50] + "...\")")
+
     elif e["type"] == "IssueCommentEvent":
         issue = e["payload"]["issue"]
         print(term.white(emoji.emojize(':speech_balloon: ') + login + " commented on issue #" + str(issue["number"]) + " on repo " + repo[:22] + " (\"" +  issue["title"][:50] + "...\")"))
@@ -110,9 +118,9 @@ commits = manager.counter(desc='Commits', unit='commits', color='green')
 
 while True:
     events = fetch_events()
-    log = read_json_log(logfile)
-    combined = log + events
-    write_logs(combined)
-    for x in combined:
+    #log = read_json_log(logfile)
+    #combined = log + events
+    #write_logs(combined)
+    for x in events:
         print_event(x, commits)
     time.sleep(0.2)
