@@ -7,6 +7,7 @@ import shutil
 import urllib.request
 import enlighten
 import blessed
+import emoji
 
 term = blessed.Terminal()
 
@@ -14,13 +15,19 @@ logfile = "log.txt"
 url = "https://api.github.com/events"
 
 def get_token():
-    f = open("ghtoken.txt", "r")
-    token = f.read()
-    return token
+    try:
+        f = open("ghtoken.txt", "r")
+        token = f.read()
+        return token
+    except:
+        print("Create a GitHub PAT and put it in ghtoken.txt: https://github.com/settings/tokens", file=sys.stderr)
+        sys.exit()
+
+token = get_token()
 
 def fetch_events():
     request = urllib.request.Request(url)
-    request.add_header('Authorization', 'token %s' % str.strip(get_token()))
+    request.add_header('Authorization', 'token %s' % token)
     response = urllib.request.urlopen(request)
     remaining_apis = int(response.headers['X-RateLimit-Remaining'])
     if remaining_apis < 1000:
@@ -43,22 +50,22 @@ def read_json_log(logfile):
 printed_event_ids = {}
 
 def print_event(e, commits_counter):
-    #print ansi_colors[hash(e["type"]) % len(ansi_colors)]
-
     #print e["type"]
+
     if e["id"] in printed_event_ids:
         return
     printed_event_ids[e["id"]] = 1
 
     login = e["actor"]["login"]
-    repo = e["repo"]["name"][:15]
+    repo = e["repo"]["name"]
 
+    # Don't print bot activity (there is a lot!)
     if "bot" in login:
         return
 
     if e["type"] == "ReleaseEvent":
         tag = e["payload"]["release"]["tag_name"]
-        print(term.white_on_firebrick3(login + " released " + tag + " of " + repo))
+        print(term.firebrick3(emoji.emojize(':rocket: ') + login + " released " + tag + " of " + repo))
     elif e["type"] == "PublicEvent":
         return
     elif e["type"] == "ForkEvent":
@@ -67,7 +74,7 @@ def print_event(e, commits_counter):
         return
     elif e["type"] == "IssueCommentEvent":
         issue = e["payload"]["issue"]
-        print(term.green(login + " commented on issue #" + str(issue["number"]) + " on repo " + repo[:22] + " (\"" +  issue["title"][:50] + "...\")"))
+        print(term.white(emoji.emojize(':speech_balloon: ') + login + " commented on issue #" + str(issue["number"]) + " on repo " + repo[:22] + " (\"" +  issue["title"][:50] + "...\")"))
     elif e["type"] == "PushEvent":
         commits = e["payload"]["commits"]
         for c in commits:
@@ -75,9 +82,21 @@ def print_event(e, commits_counter):
     elif e["type"] == "CreateEvent":
         return
     elif e["type"] == "PullRequestEvent":
-        print(term.orange(login + " " + e["payload"]["action"] + " a pull request on repo " + repo[:20] + " (\"" +  e["payload"]["pull_request"]["title"][:50] + "...\")"))
+        action = e["payload"]["action"]
+        pr_emoji = ''
+        pr_color = None
+        if action == "closed":
+            pr_emoji = emoji.emojize(":white_heavy_check_mark:")
+            pr_color = term.green
+        else:
+            pr_emoji = emoji.emojize(":sparkles:")
+            pr_color = term.yellow
+        print(pr_color(pr_emoji + ' ' + login + " " + e["payload"]["action"] + " a pull request on repo " + repo[:20] + " (\"" +  e["payload"]["pull_request"]["title"][:50] + "...\")"))
         return
     elif e["type"] == "MemberEvent":
+        return
+    elif e["type"] == "SecurityAdvisoryEvent":
+        print(term.blink("SECURITY ADVISORY"))
         return
        
 def write_logs(events):
@@ -96,4 +115,4 @@ while True:
     write_logs(combined)
     for x in combined:
         print_event(x, commits)
-    time.sleep(1)
+    time.sleep(0.2)
