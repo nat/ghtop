@@ -1,10 +1,9 @@
 #!/usr/local/bin/python3
 
-import time
-import datetime
-import dateutil
+import time, datetime, pytz
 import json
 import sys
+import signal
 import shutil
 import urllib.request
 import enlighten
@@ -52,9 +51,23 @@ def read_json_log(logfile):
 
 printed_event_ids = {}
 
+def wait_for_event(created_at):
+    ts = datetime.datetime.fromisoformat(created_at.replace('Z', ''))
+    ts = pytz.utc.localize(ts)
+
+    if wait_for_event.time_pointer == 0:
+        wait_for_event.time_pointer = ts
+    else:
+        delta = ts - wait_for_event.time_pointer
+        if delta.seconds > 0 and delta.seconds < 3:
+            time.sleep(delta.seconds)
+        wait_for_event.time_pointer = ts
+
+wait_for_event.time_pointer = 0
+
 def print_event(e, commits_counter):
 
-    ts = dateutil.parser(e["created_at"])
+    #wait_for_event(e['created_at'])
 
     if e["id"] in printed_event_ids:
         return
@@ -118,16 +131,18 @@ def write_logs(events):
     f.close()
     shutil.move("tmp.log", logfile)
 
-manager = enlighten.get_manager()
-commits = manager.counter(desc='Commits', unit='commits', color='green')
-
 def tail_events():
+    manager = enlighten.get_manager()
+    commits = manager.counter(desc='Commits', unit='commits', color='green')
     while True:
         events = fetch_events()
         log = read_json_log(logfile)
         combined = log + events
+
+        combined = sorted(combined, key=lambda x: int(x["id"]))
+
         write_logs(combined)
-        for x in events:
+        for x in combined:
             print_event(x, commits)
         time.sleep(0.2)
 
@@ -199,17 +214,24 @@ def watch_users():
                 users[login] += 1
             else:
                 users[login] = 1
-            if login in users_events:
-                users_events[login].insert(0, event_to_emoji(x))
+            if login not in users_events:
+                users_events[login] = {}
+            if x['type'] not in users_events[login]:
+                users_events[login][x['type']] = 1
             else:
-                users_events[login] = []
-                users_events[login].append(event_to_emoji(x))
+                users_events[login][x['type']] += 1
+
         print (term.clear())
+        print ("User".ljust(30), "Events".ljust(6), "PRs".ljust(5), "Issues".ljust(6), "Pushes".ljust(7))
 
         sorted_users = sorted(users.items(), key = lambda kv: (kv[1], kv[0]), reverse=True)
         for i in range(20):
             u = sorted_users[i]
-            print("%s %s %s" % (str(u[1]).ljust(6), u[0].ljust(30), ','.join(users_events[u[0]])))
+            ue = users_events[u[0]]
+            print(u[0].ljust(30), str(u[1]).ljust(6), 
+                (str(ue['PullRequestEvent']) if 'PullRequestEvent' in ue else '').ljust(5), 
+                (str(ue['IssuesEvent']) if 'IssuesEvent' in ue else '').ljust(6), 
+                (str(ue['PushEvent']) if 'PushEvent' in ue else '').ljust(7))
         time.sleep(1)
 
 def push_to_log(e):
@@ -257,9 +279,21 @@ def release_to_log(e):
     return emoji.emojize(':rocket: ') + login + " released " + tag + " of " + repo
 
 def str_clean(s):
-    return s[:120]
+    return s[:95]
+
+def signal_handler(sig, frame):
+    if sig != signal.SIGINT:
+        return
+    term=Terminal()
+    print(term.exit_fullscreen())
+    print(term.clear())
+    print(term.normal)
+    sys.exit(0)
 
 def quad_logs():
+    term = Terminal()
+    term.enter_fullscreen()
+
     ui = HSplit(
             VSplit(
                 Log(title='Issues', border_color = 2, color=7),
@@ -304,4 +338,17 @@ def simple():
         for x in events:
             print("%s %s %s" % (x["actor"]["login"], x["type"], x["repo"]["name"]))
 
-tail_events()
+if len(sys.argv) < 2:
+    print("Usage: ghtop <tail|quad|users|simple>")
+    sys.exit(1)
+
+signal.signal(signal.SIGINT, signal_handler)
+
+if sys.argv[1] == 'tail':
+    tail_events()
+elif sys.argv[1] == 'quad':
+    quad_logs()
+elif sys.argv[1] == 'users':
+    watch_users()
+elif sys.argv[1] == 'simple':
+    simple()
