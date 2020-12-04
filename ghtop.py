@@ -20,6 +20,7 @@ def get_token():
     try:
         f = open("ghtoken.txt", "r")
         token = f.read()
+        token = ''.join(token.split()) # remove all whitespace
         return token
     except:
         print("Create a GitHub PAT and put it in ghtoken.txt: https://github.com/settings/tokens", file=sys.stderr)
