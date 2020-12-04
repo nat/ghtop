@@ -19,7 +19,7 @@ url = "https://api.github.com/events"
 def get_token():
     try:
         f = open("ghtoken.txt", "r")
-        token = f.read()
+        token = f.read().rstrip()
         return token
     except:
         print("Create a GitHub PAT and put it in ghtoken.txt: https://github.com/settings/tokens", file=sys.stderr)
