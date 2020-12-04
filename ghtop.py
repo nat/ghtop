@@ -20,6 +20,7 @@ def get_token():
     try:
         f = open("ghtoken.txt", "r")
         token = f.read().rstrip()
+        f.close()
         return token
     except:
         print("Create a GitHub PAT and put it in ghtoken.txt: https://github.com/settings/tokens", file=sys.stderr)
