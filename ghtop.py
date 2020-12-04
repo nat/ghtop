@@ -19,7 +19,7 @@ url = "https://api.github.com/events"
 def get_token():
     try:
         f = open("ghtoken.txt", "r")
-        token = f.read()
+        token = f.read().rstrip()
         f.close()
         return token
     except:
