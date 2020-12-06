@@ -1,8 +1,5 @@
 See what's happening on GitHub in real time (also helpful if you need to use up your API quota as quickly as possible)
 
-### Getting Started
+Install the `emoji` and `enlighten` packages with pip to use this. Also whatever other packages you need – you'll figure it out.
 
-- Install the `emoji` and `enlighten` packages with pip
-- [Create a GitHub PAT](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token) and put it in `ghtoken.txt`
-
-With :heart: by @nat 
+Shared under the MIT license with :heart: by @nat 

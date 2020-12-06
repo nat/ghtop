@@ -1,45 +1,86 @@
 #!/usr/bin/env python3
 
-import time, datetime, pytz
-import json
-import sys
-import signal
-import shutil
-import urllib.request
-import enlighten
-import blessed
-import emoji
+import time, datetime, pytz, sys, signal, shutil, os, json, urllib.request
+import enlighten, emoji, blessed, requests, webbrowser
 from dashing import *
+from urllib.parse import parse_qs
 
 term = blessed.Terminal()
 
 logfile = "log.txt"
 url = "https://api.github.com/events"
 
+def github_auth_device():
+    client_id ='a945f87ad537bfddb109'
+
+    # Kick off the headless device auth flow on github.com
+    url = 'https://github.com/login/device/code'
+    response = requests.post(url, data = {'client_id': client_id, 'scope': ''})
+    params = parse_qs(response.text)
+
+    YELLOW = '\033[93m'
+    END = '\033[0m'
+    print ("First copy your one-time code: "  + YELLOW + params['user_code'][0] + END)
+
+    time.sleep(1)
+    input("Then, press Enter to open %s in a browser..." % (params['verification_uri'][0]))
+    webbrowser.open(params['verification_uri'][0])
+
+    print ("Waiting for authorization...", end='')
+
+    # Poll for the user to finish the auth flow
+    interval = int(params['interval'][0]) + 1
+    while True:
+        time.sleep(interval)
+        print('.', end='')
+        poll_response = requests.post('https://github.com/login/oauth/access_token', 
+            data = {'client_id': client_id, 
+                    'device_code': params['device_code'], 
+                    'grant_type': 'urn:ietf:params:oauth:grant-type:device_code'})
+        poll_params = parse_qs(poll_response.text)
+        if 'error' in poll_params:
+            continue
+        if 'access_token' in poll_params:
+            print()
+            access_token=poll_params['access_token'][0]
+            print("Got access token: " + access_token)
+            break
+
+    print("Authenticated with GitHub!")
+    return access_token
+    
 def get_token():
-    try:
-        f = open("ghtoken.txt", "r")
-        token = f.read().rstrip()
-        f.close()
-        return token
-    except:
-        print("Create a GitHub PAT and put it in ghtoken.txt: https://github.com/settings/tokens", file=sys.stderr)
-        sys.exit()
+
+    token_path = os.path.expanduser("~/.ghtop_token")
+    
+    if os.path.isfile(token_path):
+        try:
+            f = open(token_path, "r")
+            token = f.read().rstrip()
+            f.close()
+            return token
+        except:
+            print("Error reading token", file=sys.stderr)
+            sys.exit()
+
+    token = github_auth_device()
+    f = open(token_path, "w")
+    f.write(token)
+    f.close()
+
+    return token
 
 token = get_token()
 
 def fetch_events():
-    request = urllib.request.Request(url)
-    request.add_header('Authorization', 'token %s' % token)
-    response = urllib.request.urlopen(request)
+    response = requests.get(url, headers = {'Authorization': 'token ' + token})
     remaining_apis = int(response.headers['X-RateLimit-Remaining'])
     if remaining_apis < 1000:
         print("WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING ")
         print("Remaining calls: " + str(remaining_apis))
         print("WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING ")
-    data = response.read()
 
-    return json.loads(data)
+    return json.loads(response.text)
 
 def read_json_log(logfile):
     try:
