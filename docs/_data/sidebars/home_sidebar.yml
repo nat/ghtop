@@ -10,9 +10,6 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: dashing
-      url: dashing.html
-    - output: web,pdf
       title: ghtop
       url: ghtop.html
     output: web

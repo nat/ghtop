@@ -14,7 +14,7 @@ Install the `emoji` and `enlighten` packages with pip to use this. Also whatever
 
 Shared under the MIT license with :heart: by @nat
 
-```python
+```
 1+1
 ```
 
