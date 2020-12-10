@@ -123,10 +123,9 @@ def watch_users():
 
         print(term.clear())
         _pr_row("User", "Events", "PRs", "Issues", "Pushes")
-        sorted_users = sorted(users.items(), key=lambda o: (o[1], o[0]), reverse=True)
+        sorted_users = sorted(users.items(), key=lambda o: (o[1],o[0]), reverse=True)
         for u in sorted_users[:20]:
-            ue = users_events[u[0]]
-            _pr_row(u[0], u[1], ue['PullRequestEvent'], ue['IssuesEvent'], ue['PushEvent'])
+            _pr_row(*u, *itemgetter('PullRequestEvent','IssuesEvent','PushEvent')(users_events[u[0]]))
 
 # Cell
 def _push_to_log(e):
