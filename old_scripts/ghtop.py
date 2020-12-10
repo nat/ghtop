@@ -33,9 +33,9 @@ def github_auth_device():
     while True:
         time.sleep(interval)
         print('.', end='')
-        poll_response = requests.post('https://github.com/login/oauth/access_token', 
-            data = {'client_id': client_id, 
-                    'device_code': params['device_code'], 
+        poll_response = requests.post('https://github.com/login/oauth/access_token',
+            data = {'client_id': client_id,
+                    'device_code': params['device_code'],
                     'grant_type': 'urn:ietf:params:oauth:grant-type:device_code'})
         poll_params = parse_qs(poll_response.text)
         if 'error' in poll_params:
@@ -48,11 +48,11 @@ def github_auth_device():
 
     print("Authenticated with GitHub!")
     return access_token
-    
+
 def get_token():
 
     token_path = os.path.expanduser("~/.ghtop_token")
-    
+
     if os.path.isfile(token_path):
         try:
             f = open(token_path, "r")
@@ -166,7 +166,7 @@ def print_event(e, commits_counter):
     elif e["type"] == "SecurityAdvisoryEvent":
         print(term.blink("SECURITY ADVISORY"))
         return
-       
+
 def write_logs(events):
     f = open("tmp.log", "w")
     f.write(json.dumps(events, indent=2))
@@ -270,9 +270,9 @@ def watch_users():
         for i in range(20):
             u = sorted_users[i]
             ue = users_events[u[0]]
-            print(u[0].ljust(30), str(u[1]).ljust(6), 
-                (str(ue['PullRequestEvent']) if 'PullRequestEvent' in ue else '').ljust(5), 
-                (str(ue['IssuesEvent']) if 'IssuesEvent' in ue else '').ljust(6), 
+            print(u[0].ljust(30), str(u[1]).ljust(6),
+                (str(ue['PullRequestEvent']) if 'PullRequestEvent' in ue else '').ljust(5),
+                (str(ue['IssuesEvent']) if 'IssuesEvent' in ue else '').ljust(6),
                 (str(ue['PushEvent']) if 'PushEvent' in ue else '').ljust(7))
         time.sleep(1)
 
