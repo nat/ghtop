@@ -113,6 +113,7 @@ def tail_events():
     for ev in fetch_events(): print_event(ev, commits)
 
 # Cell
+def _pr_row(*its): print(f"{its[0]: <30} {its[1]: <6} {its[2]: <5} {its[3]: <6} {its[4]: <7}")
 def watch_users():
     users,users_events = defaultdict(int),defaultdict(lambda: defaultdict(int))
     for xs in chunked(fetch_events(), 10):
@@ -120,16 +121,12 @@ def watch_users():
             users[x.actor.login] += 1
             users_events[x.actor.login][x.type] += 1
 
-        print (term.clear())
-        print ("User".ljust(30), "Events".ljust(6), "PRs".ljust(5), "Issues".ljust(6), "Pushes".ljust(7))
+        print(term.clear())
+        _pr_row("User", "Events", "PRs", "Issues", "Pushes")
         sorted_users = sorted(users.items(), key=lambda o: (o[1], o[0]), reverse=True)
-        for i in range(min(len(users),20)):
-            u = sorted_users[i]
+        for u in sorted_users[:20]:
             ue = users_events[u[0]]
-            print(u[0].ljust(30), str(u[1]).ljust(6),
-                  str(ue['PullRequestEvent']).ljust(5),
-                  str(ue['IssuesEvent']).ljust(6),
-                  str(ue['PushEvent']).ljust(7))
+            _pr_row(u[0], u[1], ue['PullRequestEvent'], ue['IssuesEvent'], ue['PushEvent'])
 
 # Cell
 def _push_to_log(e):
