@@ -15,16 +15,16 @@ index = {"term": "00_ghtop.ipynb",
          "printed_event_ids": "00_ghtop.ipynb",
          "to_log": "00_ghtop.ipynb",
          "print_event": "00_ghtop.ipynb",
+         "gen_events": "00_ghtop.ipynb",
          "write_logs": "00_ghtop.ipynb",
          "tail_events": "00_ghtop.ipynb",
          "watch_users": "00_ghtop.ipynb",
          "push_to_log": "00_ghtop.ipynb",
          "str_clean": "00_ghtop.ipynb",
          "signal_handler": "00_ghtop.ipynb",
+         "logwin": "00_ghtop.ipynb",
          "quad_logs": "00_ghtop.ipynb",
-         "simple": "00_ghtop.ipynb",
-         "help_msg": "00_ghtop.ipynb",
-         "mode_map": "00_ghtop.ipynb"}
+         "simple": "00_ghtop.ipynb"}
 
 modules = ["ghtop.py"]
 
