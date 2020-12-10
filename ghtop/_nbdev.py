@@ -11,7 +11,6 @@ index = {"exit": "00_ghtop.ipynb",
          "tail_events": "00_ghtop.ipynb",
          "watch_users": "00_ghtop.ipynb",
          "push_to_log": "00_ghtop.ipynb",
-         "release_to_log": "00_ghtop.ipynb",
          "str_clean": "00_ghtop.ipynb",
          "quad_logs": "00_ghtop.ipynb",
          "simple": "00_ghtop.ipynb"}
