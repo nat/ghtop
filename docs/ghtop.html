@@ -43,9 +43,8 @@ nb_path: "00_ghtop.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">term</span> <span class="o">=</span> <span class="n">blessed</span><span class="o">.</span><span class="n">Terminal</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">term</span> <span class="o">=</span> <span class="n">Terminal</span><span class="p">()</span>
 <span class="n">logfile</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;log.txt&quot;</span><span class="p">)</span>
-<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://api.github.com/events&quot;</span>
 </pre></div>
 
     </div>
@@ -93,7 +92,7 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="exit" class="doc_header"><code>exit</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L18" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>exit</code>(<strong><code>msg</code></strong>)</p>
+<h4 id="exit" class="doc_header"><code>exit</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>exit</code>(<strong><code>msg</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -124,7 +123,7 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_token" class="doc_header"><code>get_token</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L23" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_token</code>()</p>
+<h4 id="get_token" class="doc_header"><code>get_token</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L20" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_token</code>()</p>
 </blockquote>
 
 </div>
@@ -155,39 +154,6 @@ nb_path: "00_ghtop.ipynb"
 </pre></div>
 
     </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">token</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;84dedf981b71f6d9d50a98d9a67421a61c469ef4&#39;</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -243,7 +209,7 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fetch_events" class="doc_header"><code>fetch_events</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fetch_events</code>()</p>
+<h4 id="fetch_events" class="doc_header"><code>fetch_events</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L31" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fetch_events</code>()</p>
 </blockquote>
 
 </div>
@@ -274,7 +240,7 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="read_json_log" class="doc_header"><code>read_json_log</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_json_log</code>()</p>
+<h4 id="read_json_log" class="doc_header"><code>read_json_log</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_json_log</code>()</p>
 </blockquote>
 
 </div>
@@ -301,245 +267,7 @@ nb_path: "00_ghtop.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">printed_event_ids</span> <span class="o">=</span> <span class="p">{}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="n">emoji</span><span class="o">.</span><span class="n">emojize</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">use_aliases</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ev</span> <span class="o">=</span> <span class="p">[</span><span class="n">o</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">fetch_events</span><span class="p">()</span> <span class="k">if</span> <span class="n">o</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s1">&#39;PullRequestEvent&#39;</span><span class="p">]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">o</span><span class="o">.</span><span class="n">type</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">o</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ev</span><span class="p">)]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[(0, &#39;PullRequestEvent&#39;),
- (1, &#39;PullRequestEvent&#39;),
- (2, &#39;PullRequestEvent&#39;),
- (3, &#39;PullRequestEvent&#39;),
- (4, &#39;PullRequestEvent&#39;),
- (5, &#39;PullRequestEvent&#39;),
- (6, &#39;PullRequestEvent&#39;),
- (7, &#39;PullRequestEvent&#39;),
- (8, &#39;PullRequestEvent&#39;),
- (9, &#39;PullRequestEvent&#39;)]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">printed_event_ids</span><span class="o">=</span><span class="p">{}</span>
-<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ev</span><span class="p">:</span> <span class="n">print_event</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-yellow-fg">✨ asubb opened a pull request on repo WaveBeans/wavebeans (&#34;Sample vector improvements in API...&#34;)</span>
-<span class="ansi-yellow-fg">✨ boemekeld opened a pull request on repo bohr-cloud/testepr (&#34;Update aaaa...&#34;)</span>
-<span class="ansi-yellow-fg">✨ talevy opened a pull request on repo elastic/elasticsearc (&#34;move rollup_index param out of RollupActionConfig...&#34;)</span>
-<span class="ansi-green-fg">✅ jurek91 closed a pull request on repo RobertK3000/giftapes (&#34;small tweaks...&#34;)</span>
-<span class="ansi-yellow-fg">✨ DGryanko opened a pull request on repo DGryanko/Resume_v2 (&#34;Calculator my...&#34;)</span>
-<span class="ansi-yellow-fg">✨ gustavocaraciolo opened a pull request on repo gustavocaraciolo/pat (&#34;Add entities using the JDL model `patrimonio`...&#34;)</span>
-<span class="ansi-yellow-fg">✨ xiangjingli opened a pull request on repo operator-framework/c (&#34;Upgrade Multicluster subscription operator to V0.2...&#34;)</span>
-<span class="ansi-yellow-fg">✨ leonidkit opened a pull request on repo leonidkit/thinknetic (&#34;Добавлено десятое дз...&#34;)</span>
-<span class="ansi-yellow-fg">✨ hiroto940 opened a pull request on repo inovange/inovange-si (&#34;member link...&#34;)</span>
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_title</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;(&quot;</span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">title</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span><span class="si">}</span><span class="s1">...&quot;)&#39;</span>
-<span class="k">def</span> <span class="nf">_issue</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;issue # </span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s1">&#39;</span>
-<span class="k">def</span> <span class="nf">_repo</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">22</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;on repo </span><span class="si">{</span><span class="n">r</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="print_event" class="doc_header"><code>print_event</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L42" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>print_event</code>(<strong><code>e</code></strong>, <strong><code>commits_counter</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="write_logs" class="doc_header"><code>write_logs</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L68" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write_logs</code>(<strong><code>events</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="tail_events" class="doc_header"><code>tail_events</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L72" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tail_events</code>()</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">EVENT_EMOJI_MAPPING</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span><span class="s1">&#39;::&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">EVENT_EMOJI_MAPPING</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span>
     <span class="n">CreateEvent</span><span class="o">=</span><span class="s1">&#39;:new:&#39;</span><span class="p">,</span>
     <span class="n">DeleteEvent</span><span class="o">=</span><span class="s1">&#39;:x:&#39;</span><span class="p">,</span>
     <span class="n">DeploymentEvent</span><span class="o">=</span><span class="s1">&#39;:rocket:&#39;</span><span class="p">,</span>
@@ -568,9 +296,37 @@ nb_path: "00_ghtop.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">event_to_emoji</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">EVENT_EMOJI_MAPPING</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]</span> <span class="o">==</span> <span class="s1">&#39;::&#39;</span><span class="p">:</span> <span class="k">return</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">emoji</span><span class="o">.</span><span class="n">emojize</span><span class="p">(</span><span class="n">EVENT_EMOJI_MAPPING</span><span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]],</span> <span class="n">use_aliases</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">printed_event_ids</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">emo</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="k">return</span> <span class="n">emoji</span><span class="o">.</span><span class="n">emojize</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="n">emo</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">_title</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;(&quot;</span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">title</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span><span class="si">}</span><span class="s1">...&quot;)&#39;</span>
+<span class="k">def</span> <span class="nf">_repo</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">22</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;on repo </span><span class="si">{</span><span class="n">r</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+
+<span class="k">def</span> <span class="nf">_issue</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">,</span> <span class="n">detl</span><span class="p">,</span> <span class="n">emoji</span><span class="p">):</span>
+    <span class="n">issue</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">issue</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;:</span><span class="si">{</span><span class="n">emoji</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">login</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">detl</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">issue</span> <span class="err">#</span> <span class="p">{</span><span class="n">issue</span><span class="o">.</span><span class="n">number</span><span class="p">}</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">_repo</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">_title</span><span class="p">(</span><span class="n">issue</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+
+<span class="k">def</span> <span class="nf">_issue_comment</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">):</span> <span class="k">return</span> <span class="n">_issue</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">,</span> <span class="s1">&#39;commented on&#39;</span><span class="p">,</span> <span class="s1">&#39;speech_balloon&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_issue_opened</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">):</span> <span class="k">return</span> <span class="n">_issue</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">,</span> <span class="s1">&#39;opened&#39;</span><span class="p">,</span> <span class="s1">&#39;closed_mailbox_with_raised_flag&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_issue_closed</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">):</span> <span class="k">return</span> <span class="n">_issue</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">,</span> <span class="s1">&#39;closed&#39;</span><span class="p">,</span> <span class="s1">&#39;star&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_release</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;:rocket: </span><span class="si">{</span><span class="n">login</span><span class="si">}</span><span class="s1"> released </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">release</span><span class="o">.</span><span class="n">tag_name</span><span class="si">}</span><span class="s1"> of </span><span class="si">{</span><span class="n">repo</span><span class="si">}</span><span class="s1">&#39;</span>
 </pre></div>
 
     </div>
@@ -591,7 +347,148 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="watch_users" class="doc_header"><code>watch_users</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L84" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>watch_users</code>()</p>
+<h4 id="print_event" class="doc_header"><code>print_event</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L39" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>print_event</code>(<strong><code>e</code></strong>, <strong><code>commits_counter</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ev</span> <span class="o">=</span> <span class="p">[</span><span class="n">o</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">fetch_events</span><span class="p">()</span> <span class="k">if</span> <span class="n">o</span><span class="o">.</span><span class="n">type</span><span class="o">==</span><span class="s1">&#39;PullRequestEvent&#39;</span><span class="p">]</span>
+<span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">o</span><span class="o">.</span><span class="n">type</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">o</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ev</span><span class="p">)]</span>
+<span class="n">printed_event_ids</span><span class="o">=</span><span class="p">{}</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">ev</span><span class="p">:</span> <span class="n">print_event</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-yellow-fg">✨ GregJMitchell opened a pull request on repo Oxalisviolacea/viewi (&#34;Javascript...&#34;)</span>
+<span class="ansi-green-fg">✅ jdrucza closed a pull request on repo jdrucza/bet-refinery (&#34;Create Blog “nba-championship-odds-2020”...&#34;)</span>
+<span class="ansi-yellow-fg">✨ uxkjaer opened a pull request on repo uxkjaer/ui5-ecosyste (&#34;pukll...&#34;)</span>
+<span class="ansi-green-fg">✅ bt-admin closed a pull request on repo brain-tec/account_eb (&#34;Syncing from upstream Noviat/account_ebics (12-gen...&#34;)</span>
+<span class="ansi-yellow-fg">✨ tdeenes opened a pull request on repo Ikuyadeu/vscode-R (&#34;Find in topic (help panel) #463...&#34;)</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="write_logs" class="doc_header"><code>write_logs</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L60" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write_logs</code>(<strong><code>events</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="tail_events" class="doc_header"><code>tail_events</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tail_events</code>()</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">combined</span> <span class="o">=</span> <span class="p">(</span><span class="n">fetch_events</span><span class="p">()</span><span class="o">+</span><span class="n">read_json_log</span><span class="p">())</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">using_attr</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="watch_users" class="doc_header"><code>watch_users</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L76" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>watch_users</code>()</p>
 </blockquote>
 
 </div>
@@ -622,7 +519,7 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="push_to_log" class="doc_header"><code>push_to_log</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L111" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>push_to_log</code>(<strong><code>e</code></strong>)</p>
+<h4 id="push_to_log" class="doc_header"><code>push_to_log</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L97" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>push_to_log</code>(<strong><code>e</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -651,18 +548,11 @@ nb_path: "00_ghtop.ipynb"
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">issue_to_log</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
     <span class="n">login</span><span class="p">,</span><span class="n">repo</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">actor</span><span class="o">.</span><span class="n">login</span><span class="p">,</span><span class="n">e</span><span class="o">.</span><span class="n">repo</span><span class="o">.</span><span class="n">name</span>
-    <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;IssuesEvent&quot;</span><span class="p">:</span>
-        <span class="n">action</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;payload&quot;</span><span class="p">][</span><span class="s2">&quot;action&quot;</span><span class="p">]</span>
-        <span class="n">issue</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;payload&quot;</span><span class="p">][</span><span class="s2">&quot;issue&quot;</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s1">&#39;closed&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">emoji</span><span class="o">.</span><span class="n">emojize</span><span class="p">(</span><span class="s1">&#39;:star:&#39;</span><span class="p">,</span> <span class="n">use_aliases</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>  <span class="o">+</span> <span class="n">login</span> <span class="o">+</span> <span class="s1">&#39; closed issue #&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">issue</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; on repo &quot;</span> <span class="o">+</span> <span class="n">repo</span><span class="p">[:</span><span class="mi">22</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; (</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span>  <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">][:</span><span class="mi">50</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...</span><span class="se">\&quot;</span><span class="s2">)&quot;</span>
-        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s1">&#39;opened&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">emoji</span><span class="o">.</span><span class="n">emojize</span><span class="p">(</span><span class="s1">&#39;:closed_mailbox_with_raised_flag:&#39;</span><span class="p">,</span> <span class="n">use_aliases</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span>  <span class="o">+</span> <span class="n">login</span> <span class="o">+</span> <span class="s1">&#39; opened issue #&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">issue</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; on repo &quot;</span> <span class="o">+</span> <span class="n">repo</span><span class="p">[:</span><span class="mi">22</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; (</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span>  <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">][:</span><span class="mi">50</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...</span><span class="se">\&quot;</span><span class="s2">)&quot;</span>
-
-    <span class="k">elif</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;IssueCommentEvent&quot;</span><span class="p">:</span>
-        <span class="n">issue</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;payload&quot;</span><span class="p">][</span><span class="s2">&quot;issue&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">emoji</span><span class="o">.</span><span class="n">emojize</span><span class="p">(</span><span class="s1">&#39;:speech_balloon: &#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">login</span> <span class="o">+</span> <span class="s2">&quot; commented on issue #&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">issue</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; on repo &quot;</span> <span class="o">+</span> <span class="n">repo</span><span class="p">[:</span><span class="mi">22</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; (</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span>  <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">][:</span><span class="mi">50</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...</span><span class="se">\&quot;</span><span class="s2">)&quot;</span>
+    <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;IssuesEvent&quot;</span><span class="p">:</span>
+        <span class="n">action</span><span class="p">,</span><span class="n">issue</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">action</span><span class="p">,</span><span class="n">e</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">issue</span>
+        <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s1">&#39;closed&#39;</span><span class="p">:</span> <span class="k">return</span> <span class="n">emo</span><span class="p">(</span><span class="n">_issue_closed</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s1">&#39;opened&#39;</span><span class="p">:</span> <span class="k">return</span> <span class="n">emo</span><span class="p">(</span><span class="n">_issue_opened</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">e</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;IssueCommentEvent&quot;</span><span class="p">:</span> <span class="k">return</span> <span class="n">emo</span><span class="p">(</span><span class="n">_issue_comment</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -681,14 +571,8 @@ nb_path: "00_ghtop.ipynb"
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">pr_to_log</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
     <span class="n">login</span><span class="p">,</span><span class="n">repo</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">actor</span><span class="o">.</span><span class="n">login</span><span class="p">,</span><span class="n">e</span><span class="o">.</span><span class="n">repo</span><span class="o">.</span><span class="n">name</span>
-    <span class="n">action</span> <span class="o">=</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;payload&quot;</span><span class="p">][</span><span class="s2">&quot;action&quot;</span><span class="p">]</span>
-    <span class="n">pr_emoji</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">pr_color</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;closed&quot;</span><span class="p">:</span>
-        <span class="n">pr_emoji</span> <span class="o">=</span> <span class="n">emoji</span><span class="o">.</span><span class="n">emojize</span><span class="p">(</span><span class="s2">&quot;:white_heavy_check_mark:&quot;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">pr_emoji</span> <span class="o">=</span> <span class="n">emoji</span><span class="o">.</span><span class="n">emojize</span><span class="p">(</span><span class="s2">&quot;:sparkles:&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">pr_emoji</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">login</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">e</span><span class="p">[</span><span class="s2">&quot;payload&quot;</span><span class="p">][</span><span class="s2">&quot;action&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; a pull request on repo &quot;</span> <span class="o">+</span> <span class="n">repo</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; (</span><span class="se">\&quot;</span><span class="s2">&quot;</span> <span class="o">+</span>  <span class="n">e</span><span class="p">[</span><span class="s2">&quot;payload&quot;</span><span class="p">][</span><span class="s2">&quot;pull_request&quot;</span><span class="p">][</span><span class="s2">&quot;title&quot;</span><span class="p">][:</span><span class="mi">50</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...</span><span class="se">\&quot;</span><span class="s2">)&quot;</span>
+    <span class="n">emo</span><span class="p">(</span><span class="s2">&quot;white_heavy_check_mark&quot;</span> <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;closed&quot;</span> <span class="k">else</span> <span class="s2">&quot;sparkles&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;:</span><span class="si">{</span><span class="n">pr_emoji</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">login</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">action</span><span class="si">}</span><span class="s1"> a pull request </span><span class="si">{</span><span class="n">_repo</span><span class="p">(</span><span class="n">repo</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">_title</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">pull_request</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
 </pre></div>
 
     </div>
@@ -709,7 +593,7 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="release_to_log" class="doc_header"><code>release_to_log</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L116" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>release_to_log</code>(<strong><code>e</code></strong>)</p>
+<h4 id="release_to_log" class="doc_header"><code>release_to_log</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L101" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>release_to_log</code>(<strong><code>e</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -740,7 +624,7 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="str_clean" class="doc_header"><code>str_clean</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L122" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>str_clean</code>(<strong><code>s</code></strong>)</p>
+<h4 id="str_clean" class="doc_header"><code>str_clean</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L106" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>str_clean</code>(<strong><code>s</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -768,9 +652,7 @@ nb_path: "00_ghtop.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">signal_handler</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">sig</span> <span class="o">!=</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">:</span>
-        <span class="k">return</span>
-    <span class="n">term</span><span class="o">=</span><span class="n">Terminal</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">sig</span> <span class="o">!=</span> <span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">:</span> <span class="k">return</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">exit_fullscreen</span><span class="p">())</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">clear</span><span class="p">())</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">term</span><span class="o">.</span><span class="n">normal</span><span class="p">)</span>
@@ -795,7 +677,7 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="quad_logs" class="doc_header"><code>quad_logs</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L125" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>quad_logs</code>()</p>
+<h4 id="quad_logs" class="doc_header"><code>quad_logs</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L109" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>quad_logs</code>()</p>
 </blockquote>
 
 </div>
@@ -826,7 +708,7 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="simple" class="doc_header"><code>simple</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L162" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>simple</code>()</p>
+<h4 id="simple" class="doc_header"><code>simple</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L137" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>simple</code>()</p>
 </blockquote>
 
 </div>
@@ -854,7 +736,6 @@ nb_path: "00_ghtop.ipynb"
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span> <span class="n">exit</span><span class="p">(</span><span class="s2">&quot;Usage: ghtop &lt;tail|quad|users|simple&gt;&quot;</span><span class="p">)</span>
-
 <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">,</span> <span class="n">signal_handler</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;tail&#39;</span><span class="p">:</span> <span class="n">tail_events</span><span class="p">()</span>

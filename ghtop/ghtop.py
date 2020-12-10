@@ -4,11 +4,8 @@ __all__ = ['exit', 'get_token', 'fetch_events', 'read_json_log', 'print_event', 
            'watch_users', 'push_to_log', 'release_to_log', 'str_clean', 'quad_logs', 'simple']
 
 # Cell
-import time, datetime, pytz, sys, signal, shutil, os, json, urllib.request
-import enlighten, emoji, blessed, requests, webbrowser
+import time, sys, signal, shutil, os, json, enlighten, emoji, blessed
 from .dashing import *
-from urllib.parse import parse_qs
-
 from collections import defaultdict
 
 from fastcore.utils import *
@@ -46,17 +43,12 @@ def print_event(e, commits_counter):
     # Don't print bot activity (there is a lot!)
     if "bot" in login or "b0t" in login: return
 
-    if e.type == "ReleaseEvent": show(term.firebrick3(f':rocket: {login} released {e.payload.release.tag_name} of {repo}'))
+    if e.type == "ReleaseEvent": show(term.firebrick3(_release(e, login, repo)))
     elif e.type in ("PublicEvent","ForkEvent","CreateEvent","MemberEvent"): return
     elif e.type == "IssuesEvent":
-        action,issue = e.payload.action,e.payload.issue
-        if action == 'closed':
-            show(f':star: {login} closed issue # {issue.number} {_repo(r)} {_title(issue)}')
-        elif action == 'opened':
-            show(f':closed_mailbox_with_raised_flag: {login} opened {issue_(issue)} {_repo(r)} {_title(issue)}')
-    elif e.type == "IssueCommentEvent":
-        issue = e.payload.issue
-        show(term.white(f':speech_balloon: {login} commented on {issue_(issue)} {_repo(r)} {_title(issue)}'))
+        if e.payload.action == 'closed': show(_issue_closed(e, login, repo))
+        elif e.payload.action == 'opened': show(_issue_opened(e, login, repo))
+    elif e.type == "IssueCommentEvent": show(term.white(_issue_comment(e, login, repo)))
     elif e.type == "PushEvent":
         for c in e.payload.commits: commits_counter.update()
     elif e.type == "PullRequestEvent":
@@ -74,7 +66,7 @@ def tail_events():
     commits = manager.counter(desc='Commits', unit='commits', color='green')
     while True:
         events = fetch_events()
-        log = read_json_log(logfile)
+        log = read_json_log()
         combined = sorted(log + events, key=lambda x: int(x["id"]))
         write_logs(combined)
         for x in combined: print_event(x, commits)
@@ -82,50 +74,40 @@ def tail_events():
 
 # Cell
 def watch_users():
-    users = {}
-    users_events = {}
+    users,users_events = defaultdict(int),defaultdict(lambda: defaultdict(int))
     while True:
-        events = fetch_events()
-        for x in events:
-            login = x["actor"]["login"]
-            if login in users: users[login] += 1
-            else: users[login] = 1
-            if login not in users_events: users_events[login] = {}
-            if x['type'] not in users_events[login]: users_events[login][x['type']] = 1
-            else: users_events[login][x['type']] += 1
+        for x in fetch_events():
+            login = e.actor.login
+            users[login] += 1
+            users_events[login][x.type] += 1
 
         print (term.clear())
         print ("User".ljust(30), "Events".ljust(6), "PRs".ljust(5), "Issues".ljust(6), "Pushes".ljust(7))
-
         sorted_users = sorted(users.items(), key = lambda kv: (kv[1], kv[0]), reverse=True)
         for i in range(20):
             u = sorted_users[i]
             ue = users_events[u[0]]
             print(u[0].ljust(30), str(u[1]).ljust(6),
-                (str(ue['PullRequestEvent']) if 'PullRequestEvent' in ue else '').ljust(5),
-                (str(ue['IssuesEvent']) if 'IssuesEvent' in ue else '').ljust(6),
-                (str(ue['PushEvent']) if 'PushEvent' in ue else '').ljust(7))
+                  str(ue.get('PullRequestEvent', '')).ljust(5),
+                  str(ue.get('IssuesEvent', '')).ljust(6),
+                  str(ue.get('PushEvent', '')).ljust(7))
         time.sleep(1)
 
 # Cell
 def push_to_log(e):
-    login,repo = e.actor.login,e.repo.name
-    return "%s pushed %d commits to repo %s" % (login, len(e["payload"]["commits"]), repo)
+    return f"{e.actor.login} pushed {len(e.payload.commits)} commits to repo {e.repo.name}"
 
 # Cell
 def release_to_log(e):
     login,repo = e.actor.login,e.repo.name
-    tag = e["payload"]["release"]["tag_name"]
-    return emoji.emojize(':rocket: ') + login + " released " + tag + " of " + repo
+    return emo(_release(e, login, repo))
 
 # Cell
 def str_clean(s): return s[:95]
 
 # Cell
 def quad_logs():
-    term = Terminal()
     term.enter_fullscreen()
-
     ui = HSplit(
             VSplit(
                 Log(title='Issues', border_color = 2, color=7),
@@ -137,19 +119,12 @@ def quad_logs():
             ),
         )
 
-    issues = ui.items[0].items[0]
-    commits = ui.items[0].items[1]
-    prs = ui.items[1].items[0]
-    releases = ui.items[1].items[1]
-
-    issues.append(" ")
-    commits.append(" ")
-    prs.append(" ")
-    releases.append(" ")
+    issues,commits = ui.items[0].items
+    prs,releases = ui.items[1].items
+    for o in issues,commits,prs,releases: o.append(" ")
 
     while True:
-        events = fetch_events()
-        for x in events:
+        for x in fetch_events():
             t = x["type"]
             if t == 'PushEvent': commits.append(str_clean(push_to_log(x)))
             elif t == 'IssuesEvent' or t == 'IssueCommentEvent': issues.append(str_clean(issue_to_log(x)))
@@ -161,6 +136,4 @@ def quad_logs():
 # Cell
 def simple():
     while True:
-        events = fetch_events()
-        for x in events:
-            print("%s %s %s" % (x["actor"]["login"], x["type"], x["repo"]["name"]))
+        for x in fetch_events(): print(f"{x.actor.login} {x.type} {x.repo.name}")
