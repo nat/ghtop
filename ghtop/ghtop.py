@@ -68,7 +68,7 @@ def fetch_events(types=None):
     "Generate an infinite stream of events optionally filtered to `types`"
     while True:
         yield from (o for o in api.activity.list_public_events() if not types or o.type in types)
-        sleep(0.1)
+        sleep(0.2)
 
 # Cell
 Events = dict(
@@ -117,21 +117,19 @@ def watch_users():
     users,users_events = defaultdict(int),defaultdict(lambda: defaultdict(int))
     for xs in chunked(fetch_events(), 10):
         for x in xs:
-            login = x.actor.login
-            users[login] += 1
-            users_events[login][x.type] += 1
+            users[x.actor.login] += 1
+            users_events[x.actor.login][x.type] += 1
 
         print (term.clear())
         print ("User".ljust(30), "Events".ljust(6), "PRs".ljust(5), "Issues".ljust(6), "Pushes".ljust(7))
-        sorted_users = sorted(users.items(), key = lambda kv: (kv[1], kv[0]), reverse=True)
-        for i in range(20):
+        sorted_users = sorted(users.items(), key=lambda o: (o[1], o[0]), reverse=True)
+        for i in range(min(len(users),20)):
             u = sorted_users[i]
             ue = users_events[u[0]]
             print(u[0].ljust(30), str(u[1]).ljust(6),
-                  str(ue.get('PullRequestEvent', '')).ljust(5),
-                  str(ue.get('IssuesEvent', '')).ljust(6),
-                  str(ue.get('PushEvent', '')).ljust(7))
-        sleep(1)
+                  str(ue['PullRequestEvent']).ljust(5),
+                  str(ue['IssuesEvent']).ljust(6),
+                  str(ue['PushEvent']).ljust(7))
 
 # Cell
 def _push_to_log(e):
@@ -153,7 +151,6 @@ def quad_logs():
             f = [_to_log,_push_to_log][x.type == 'PushEvent']
             d[x.type].append(f(x)[:95])
         ui.display()
-        sleep(0.1)
 
 # Cell
 def simple():
