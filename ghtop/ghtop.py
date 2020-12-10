@@ -120,7 +120,7 @@ def watch_users():
     users,users_events = defaultdict(int),defaultdict(lambda: defaultdict(int))
     while True:
         for x in fetch_events():
-            login = e.actor.login
+            login = x.actor.login
             users[login] += 1
             users_events[login][x.type] += 1
 
