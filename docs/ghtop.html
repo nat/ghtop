@@ -267,40 +267,12 @@ nb_path: "00_ghtop.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#     CreateEvent=&#39;🆕&#39;,</span>
-<span class="c1">#     DeleteEvent=&#39;❌&#39;,</span>
-<span class="c1">#     DeploymentEvent=&#39;🚀&#39;,</span>
-<span class="c1">#     ForkEvent=&#39;🍴&#39;,</span>
-<span class="c1">#     GistEvent=&#39;📒&#39;,</span>
-<span class="c1">#     IssueCommentEvent=&#39;💬&#39;,</span>
-<span class="c1">#     LabelEvent=&#39;🏷&#39;,</span>
-<span class="c1">#     PushEvent=&#39;🤜&#39;,</span>
-<span class="c1">#     ReleaseEvent=&#39;🚀&#39;,</span>
-<span class="c1">#     StarEvent=&#39;⭐&#39;,</span>
-<span class="c1">#     WatchEvent=&#39;👀&#39;</span>
-<span class="c1"># ))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Events</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-    <span class="n">IssuesEvent_closed</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;⭐&#39;</span><span class="p">,</span> <span class="s1">&#39;closed&#39;</span><span class="p">,</span> <span class="n">noop</span><span class="p">,</span> <span class="s1">&#39;issue&#39;</span><span class="p">),</span>
-    <span class="n">IssuesEvent_opened</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;📫&#39;</span><span class="p">,</span> <span class="s1">&#39;opened&#39;</span><span class="p">,</span> <span class="n">noop</span><span class="p">,</span> <span class="s1">&#39;issue&#39;</span><span class="p">),</span>
-    <span class="n">IssueCommentEvent</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;💬&#39;</span><span class="p">,</span> <span class="s1">&#39;commented on&#39;</span><span class="p">,</span> <span class="n">term</span><span class="o">.</span><span class="n">white</span><span class="p">,</span> <span class="s1">&#39;issue&#39;</span><span class="p">),</span>
-    <span class="n">PullRequestEvent_opened</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;✨&#39;</span><span class="p">,</span> <span class="s1">&#39;opened a pull request&#39;</span><span class="p">,</span> <span class="n">term</span><span class="o">.</span><span class="n">yellow</span><span class="p">,</span> <span class="s1">&#39;pull_request&#39;</span><span class="p">),</span>
-    <span class="n">PullRequestEvent_closed</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;✔&#39;</span><span class="p">,</span> <span class="s1">&#39;closed a pull request&#39;</span><span class="p">,</span> <span class="n">term</span><span class="o">.</span><span class="n">green</span><span class="p">,</span> <span class="s1">&#39;pull_request&#39;</span><span class="p">),</span>
+    <span class="n">IssuesEvent_closed</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;⭐&#39;</span><span class="p">,</span> <span class="s1">&#39;closed&#39;</span><span class="p">,</span> <span class="n">noop</span><span class="p">),</span>
+    <span class="n">IssuesEvent_opened</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;📫&#39;</span><span class="p">,</span> <span class="s1">&#39;opened&#39;</span><span class="p">,</span> <span class="n">noop</span><span class="p">),</span>
+    <span class="n">IssueCommentEvent</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;💬&#39;</span><span class="p">,</span> <span class="s1">&#39;commented on&#39;</span><span class="p">,</span> <span class="n">term</span><span class="o">.</span><span class="n">white</span><span class="p">),</span>
+    <span class="n">PullRequestEvent_opened</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;✨&#39;</span><span class="p">,</span> <span class="s1">&#39;opened a pull request&#39;</span><span class="p">,</span> <span class="n">term</span><span class="o">.</span><span class="n">yellow</span><span class="p">),</span>
+    <span class="n">PullRequestEvent_closed</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;✔&#39;</span><span class="p">,</span> <span class="s1">&#39;closed a pull request&#39;</span><span class="p">,</span> <span class="n">term</span><span class="o">.</span><span class="n">green</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -335,33 +307,15 @@ nb_path: "00_ghtop.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">_title</span><span class="p">(</span><span class="n">d</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;(&quot;</span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">title</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span><span class="si">}</span><span class="s1">...&quot;)&#39;</span>
-<span class="k">def</span> <span class="nf">_repo</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;on repo </span><span class="si">{</span><span class="n">r</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
-<span class="k">def</span> <span class="nf">_release</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">):</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;🚀 </span><span class="si">{</span><span class="n">login</span><span class="si">}</span><span class="s1"> released </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">release</span><span class="o">.</span><span class="n">tag_name</span><span class="si">}</span><span class="s1"> of </span><span class="si">{</span><span class="n">repo</span><span class="si">}</span><span class="s1">&#39;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">to_log</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
     <span class="n">login</span><span class="p">,</span><span class="n">repo</span><span class="p">,</span><span class="n">pay</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">actor</span><span class="o">.</span><span class="n">login</span><span class="p">,</span><span class="n">e</span><span class="o">.</span><span class="n">repo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">e</span><span class="o">.</span><span class="n">payload</span>
     <span class="n">typ</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">type</span> <span class="o">+</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;_</span><span class="si">{</span><span class="n">pay</span><span class="o">.</span><span class="n">action</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;PullRequestEvent&#39;</span><span class="p">,</span><span class="s1">&#39;IssuesEvent&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="n">emoji</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span><span class="n">color</span><span class="p">,</span><span class="n">attr</span> <span class="o">=</span> <span class="n">Events</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">emoji</span><span class="p">,</span><span class="n">msg</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="n">Events</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">emoji</span><span class="p">:</span>
         <span class="n">xtra</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;PullRequestEvent&quot;</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39; issue # </span><span class="si">{</span><span class="n">pay</span><span class="o">.</span><span class="n">issue</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s1">&#39;</span>
-        <span class="k">return</span> <span class="n">color</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">emoji</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">login</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">msg</span><span class="si">}{</span><span class="n">xtra</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">_repo</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">_title</span><span class="p">(</span><span class="n">pay</span><span class="p">[</span><span class="n">attr</span><span class="p">])</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">e</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;ReleaseEvent&quot;</span><span class="p">:</span> <span class="k">return</span> <span class="n">term</span><span class="o">.</span><span class="n">firebrick3</span><span class="p">(</span><span class="n">_release</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">login</span><span class="p">,</span> <span class="n">repo</span><span class="p">))</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">try_attrs</span><span class="p">(</span><span class="n">pay</span><span class="p">,</span> <span class="s2">&quot;pull_request&quot;</span><span class="p">,</span> <span class="s2">&quot;issue&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">color</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">emoji</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">login</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">msg</span><span class="si">}{</span><span class="n">xtra</span><span class="si">}</span><span class="s1"> on repo </span><span class="si">{</span><span class="n">repo</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span><span class="si">}</span><span class="s1"> (&quot;</span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">title</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span><span class="si">}</span><span class="s1">...&quot;)&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">e</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;ReleaseEvent&quot;</span><span class="p">:</span> <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;🚀 </span><span class="si">{</span><span class="n">login</span><span class="si">}</span><span class="s1"> released </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">payload</span><span class="o">.</span><span class="n">release</span><span class="o">.</span><span class="n">tag_name</span><span class="si">}</span><span class="s1"> of </span><span class="si">{</span><span class="n">repo</span><span class="si">}</span><span class="s1">&#39;</span>
 </pre></div>
 
     </div>
@@ -425,16 +379,12 @@ nb_path: "00_ghtop.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-green-fg">✔ lacomaco closed a pull request on repo boostcamp-2020/Proje (&#34;PieGraph 페이지 생성...&#34;)</span>
-<span class="ansi-yellow-fg">✨ ddacw opened a pull request on repo CS201-Platal-Game/Pl (&#34;Clock implementation...&#34;)</span>
-<span class="ansi-green-fg">✔ dangokanako closed a pull request on repo dangokanako/JieLink. (&#34;获取最新代码？...&#34;)</span>
-<span class="ansi-red-fg">🚀 tuuzed released 0.12.0.BETA of tuuzed/LightTunnel</span>
-<span class="ansi-green-fg">✔ OrionEdwards-Gallagher closed a pull request on repo GallagherSecurity/mo (&#34;Orion/sdk15...&#34;)</span>
-📫 HCookY95 opened issue # 6 on repo XiuweiHe/EmotionClas (&#34;Unknow url type...&#34;)
-<span class="ansi-green-fg">✔ stephqq closed a pull request on repo stephqq/thinkMindful (&#34;Bump lodash from 4.17.15 to 4.17.19...&#34;)</span>
-<span class="ansi-yellow-fg">✨ rachellegelden opened a pull request on repo canvas-gamification/ (&#34;cleanup exam workflow...&#34;)</span>
-📫 Yamboy1 opened issue # 8704 on repo denoland/deno (&#34;Dead link on `Script Installer` manual page...&#34;)
-<span class="ansi-green-fg">✔ r2dev2bb8 closed a pull request on repo KentoNishi/LiveTL (&#34;Safari Auto Build now pulls version number automat...&#34;)</span>
+<pre>⭐ won-bae closed issue # 41 on repo clovaai/wsolevaluati (&#34;Data split for FSL...&#34;)
+<span class="ansi-green-fg">✔ GabrielJSuarez closed a pull request on repo GabrielJSuarez/priva (&#34;Live version...&#34;)</span>
+📫 ssabo1 opened issue # 3682 on repo sparkdesignsystem/sp (&#34;[SprkBuild] HUGE Autocomplete Component - HTML...&#34;)
+⭐ Shikugawa closed issue # 24943 on repo grpc/grpc (&#34;`startCall()` won&#39;t be invoked on re-established T...&#34;)
+📫 JadenBalogh opened issue # 18 on repo john-and-jaden/strat (&#34;Add stone resource to spawning algorithm...&#34;)
+<span class="ansi-yellow-fg">✨ Ethan-kim9 opened a pull request on repo Ethan-kim9/KH_semipr (&#34;Temp...&#34;)</span>
 </pre>
 </div>
 </div>
