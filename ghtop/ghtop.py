@@ -5,7 +5,7 @@ __all__ = ['term', 'logfile', 'github_auth_device', 'token', 'limit_cb', 'api', 
 
 # Cell
 import sys, signal, shutil, os, json, enlighten, emoji, blessed
-from .dashing import *
+from dashing import *
 from collections import defaultdict
 from warnings import warn
 from itertools import islice
@@ -170,7 +170,7 @@ def _signal_handler(sig, frame):
 # Cell
 def _help(): _exit("Usage: ghtop <tail|quad|users|simple>")
 if __name__ == '__main__' and not IN_NOTEBOOK:
-    if len(sys.argv) < 2: _exit(help_msg)
+    if len(sys.argv) < 2: _help()
     signal.signal(signal.SIGINT, _signal_handler)
     dict(tail=tail_events, quad=quad_logs, users=watch_users, simple=simple
         ).get(sys.argv[1],_help)()
