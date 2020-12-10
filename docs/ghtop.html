@@ -54,8 +54,9 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="github_auth_device" class="doc_header"><code>github_auth_device</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>github_auth_device</code>()</p>
+<h4 id="github_auth_device" class="doc_header"><code>github_auth_device</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L24" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>github_auth_device</code>(<strong><code>wb</code></strong>=<em><code>''</code></em>, <strong><code>n_polls</code></strong>=<em><code>9999</code></em>)</p>
 </blockquote>
+<p>Authenticate with GitHub, polling up to <code>n_polls</code> times to wait for completion</p>
 
 </div>
 
@@ -74,68 +75,13 @@ nb_path: "00_ghtop.ipynb"
 </div>
     {% endraw %}
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="exit" class="doc_header"><code>exit</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L35" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>exit</code>(<strong><code>msg</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When we run this we'll be shown a URL to visit and a code to enter in order to authenticate. Normally we'll be prompted to open a browser, and the function will wait for authentication to complete -- for demonstrating here we'll skip both of these steps:</p>
 
 </div>
 </div>
-
 </div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_token" class="doc_header"><code>get_token</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L40" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_token</code>()</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -143,202 +89,7 @@ nb_path: "00_ghtop.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">token</span> <span class="o">=</span> <span class="n">get_token</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="limit_cb" class="doc_header"><code>limit_cb</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>limit_cb</code>(<strong><code>rem</code></strong>, <strong><code>quota</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="fetch_events" class="doc_header"><code>fetch_events</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L59" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fetch_events</code>()</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="read_json_log" class="doc_header"><code>read_json_log</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_json_log</code>()</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="to_log" class="doc_header"><code>to_log</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L82" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>to_log</code>(<strong><code>e</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="print_event" class="doc_header"><code>print_event</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>print_event</code>(<strong><code>e</code></strong>, <strong><code>commits_counter</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">printed_event_ids</span><span class="o">=</span><span class="p">{}</span>
-<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">fetch_events</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;IssuesEvent&#39;</span><span class="p">,</span><span class="s1">&#39;ReleaseEvent&#39;</span><span class="p">,</span><span class="s1">&#39;PullRequestEvent&#39;</span><span class="p">):</span> <span class="n">print_event</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">github_auth_device</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="n">n_polls</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -351,17 +102,276 @@ nb_path: "00_ghtop.ipynb"
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-green-fg">✔ AlonBru closed a pull request on repo suvelocity/challenge (&#34;Documentation...&#34;)</span>
-📫 lupupitkanen opened issue # 7980 on repo hashicorp/terraform- (&#34;Add support for transaction_log_retention_days in ...&#34;)
-📫 amulyamalla opened issue # 202 on repo keycloak/keycloak-co (&#34;Unable import user from LDAP ...&#34;)
-<span class="ansi-green-fg">✔ SSunSShine closed a pull request on repo SSunSShine/QAsystem (&#34;新增对API的测试模块，顺带更新下README.md...&#34;)</span>
-<span class="ansi-yellow-fg">✨ andipaetzold opened a pull request on repo contentful/ui-extens (&#34;Run Cypress tests in parallel...&#34;)</span>
-<span class="ansi-yellow-fg">✨ JoshMarler opened a pull request on repo nick-thompson/bluepr (&#34;Fix broken hot-reload behaviour....&#34;)</span>
-<span class="ansi-yellow-fg">✨ TaniaBondarenko opened a pull request on repo OleksiyRudenko/a-tin (&#34;List a tiny JS world by TaniaBondarenko...&#34;)</span>
-<span class="ansi-yellow-fg">✨ CreeperPlanet26 opened a pull request on repo Maxisthemoose/tycoon (&#34;MainEmbed class...&#34;)</span>
-<span class="ansi-green-fg">✔ TofikAliarov closed a pull request on repo Ihor-malyshko/Kidsli (&#34;getting info from forms...&#34;)</span>
-<span class="ansi-yellow-fg">✨ voryzen opened a pull request on repo VivumLab/VivumLab (&#34;refactor(service): fixes pixelfed...&#34;)</span>
-📫 pddemo opened issue # 226068 on repo pddemo/demo (&#34;Rustic Plastic Chicken...&#34;)
+<pre>First copy your one-time code: <span class="ansi-yellow-fg">6276-D6C6</span>
+Then visit https://github.com/login/device in your browser, and paste the code when prompted.
+Waiting for authorization...Authentication not complete!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="limit_cb" class="doc_header"><code>limit_cb</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L58" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>limit_cb</code>(<strong><code>rem</code></strong>, <strong><code>quota</code></strong>)</p>
+</blockquote>
+<p>Callback to warn user when close to using up hourly quota</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">limit_cb</span><span class="p">(</span><span class="n">rem</span><span class="p">,</span><span class="n">quota</span><span class="p">):</span>
+    <span class="s2">&quot;Callback to warn user when close to using up hourly quota&quot;</span>
+    <span class="n">w</span><span class="o">=</span><span class="s1">&#39;WARNING &#39;</span><span class="o">*</span><span class="mi">7</span>
+    <span class="k">if</span> <span class="n">rem</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">w</span><span class="si">}</span><span class="se">\n</span><span class="s2">Remaining calls: </span><span class="si">{</span><span class="n">rem</span><span class="si">}</span><span class="s2"> out of </span><span class="si">{</span><span class="n">quota</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">w</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When creating <code>GhApi</code> we can pass a callback which will be called after each API operation. In this case, we use it to warn the user when their quota is getting low.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="n">GhApi</span><span class="p">(</span><span class="n">limit_cb</span><span class="o">=</span><span class="n">limit_cb</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="fetch_events" class="doc_header"><code>fetch_events</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L67" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fetch_events</code>(<strong><code>types</code></strong>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>Generate an infinite stream of events optionally filtered to <code>types</code></p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="/ghtop/ghtop.html#api.activity.list_public_events"><code>api.activity.list_public_events</code></a> returns 30 events at a time, and <a href="/ghtop/ghtop.html#fetch_events"><code>fetch_events</code></a> turns that into an infinite length stream. We can take a look at the most recent event to see what type it is:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ev</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">fetch_events</span><span class="p">())</span>
+<span class="n">ev</span><span class="o">.</span><span class="n">type</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;PullRequestEvent&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="print_event" class="doc_header"><code>print_event</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L97" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>print_event</code>(<strong><code>e</code></strong>, <strong><code>commits_counter</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can pretty print a selection of event types using <a href="/ghtop/ghtop.html#print_event"><code>print_event</code></a> (note that <a href="/ghtop/ghtop.html#print_event"><code>print_event</code></a> filters out most bot activity), eg:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gen</span> <span class="o">=</span> <span class="n">fetch_events</span><span class="p">(</span><span class="n">types</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;IssuesEvent&#39;</span><span class="p">,</span><span class="s1">&#39;ReleaseEvent&#39;</span><span class="p">,</span><span class="s1">&#39;PullRequestEvent&#39;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">islice</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="mi">30</span><span class="p">):</span> <span class="n">print_event</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-green-fg">✔ jadir-junior closed a pull request on repo jadir-junior/boilerp (&#34;Bump @types/node from 14.14.10 to 14.14.11...&#34;)</span>
+<span class="ansi-green-fg">✔ dylanmcreynolds closed a pull request on repo als-computing/splash (&#34;Imrpove documentation...&#34;)</span>
+📫 hamelsmu opened issue # 240 on repo hamelsmu/test31 (&#34;Hello Jeremy!!...&#34;)
+📫 hamelsmu opened issue # 241 on repo hamelsmu/test31 (&#34;Hello Jeremy!!...&#34;)
+<span class="ansi-yellow-fg">✨ endorama opened a pull request on repo endorama/two-factor- (&#34;add build workflow...&#34;)</span>
+<span class="ansi-yellow-fg">✨ aaronayres35 opened a pull request on repo enthought/apptools (&#34;Add extras_require to setup.py for optional depend...&#34;)</span>
+⭐ Alessandro100 closed issue # 196 on repo DPigeon/Money-Tree (&#34;Blue Rectangle Appears on Recent Text Form...&#34;)
+⭐ youkou2 closed issue # 1 on repo youkou2/github-slide (&#34;Getting Started with GitHub...&#34;)
+<span class="ansi-green-fg">✔ phlax closed a pull request on repo envoyproxy/playgroun (&#34;py: Refactoring and tests...&#34;)</span>
+<span class="ansi-yellow-fg">✨ andrey-canon opened a pull request on repo eduNEXT/edunext-plat (&#34;Fix course about with edxnotes...&#34;)</span>
+📫 hackergil opened issue # 10344 on repo SAP/spartacus (&#34;Docs for migrations...&#34;)
+📫 hamelsmu opened issue # 243 on repo hamelsmu/test31 (&#34;Hello Jeremy!!...&#34;)
+⭐ JiLiZART closed issue # 47 on repo JiLiZART/bbob (&#34;How enable/add custom attributes/enable any attrib...&#34;)
+<span class="ansi-yellow-fg">✨ tbanish opened a pull request on repo learn-co-students/fe (&#34;Done...&#34;)</span>
 </pre>
 </div>
 </div>
@@ -383,9 +393,9 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="gen_events" class="doc_header"><code>gen_events</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L105" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>gen_events</code>()</p>
+<h4 id="tail_events" class="doc_header"><code>tail_events</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L109" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tail_events</code>()</p>
 </blockquote>
-<p>Generate an infinite stream of events</p>
+<p>Print events from <a href="/ghtop/ghtop.html#fetch_events"><code>fetch_events</code></a> along with a counter of push events</p>
 
 </div>
 
@@ -415,31 +425,7 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="write_logs" class="doc_header"><code>write_logs</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L110" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>write_logs</code>(<strong><code>events</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="tail_events" class="doc_header"><code>tail_events</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L114" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>tail_events</code>()</p>
+<h4 id="watch_users" class="doc_header"><code>watch_users</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L116" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>watch_users</code>()</p>
 </blockquote>
 
 </div>
@@ -463,6 +449,13 @@ nb_path: "00_ghtop.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
 <div class="output_wrapper">
 <div class="output">
 
@@ -470,7 +463,7 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="watch_users" class="doc_header"><code>watch_users</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L124" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>watch_users</code>()</p>
+<h4 id="quad_logs" class="doc_header"><code>quad_logs</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L142" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>quad_logs</code>()</p>
 </blockquote>
 
 </div>
@@ -501,7 +494,7 @@ nb_path: "00_ghtop.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="push_to_log" class="doc_header"><code>push_to_log</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L145" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>push_to_log</code>(<strong><code>e</code></strong>)</p>
+<h4 id="simple" class="doc_header"><code>simple</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L159" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>simple</code>()</p>
 </blockquote>
 
 </div>
@@ -517,147 +510,6 @@ nb_path: "00_ghtop.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="str_clean" class="doc_header"><code>str_clean</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L149" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>str_clean</code>(<strong><code>s</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="signal_handler" class="doc_header"><code>signal_handler</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L152" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>signal_handler</code>(<strong><code>sig</code></strong>, <strong><code>frame</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="logwin" class="doc_header"><code>logwin</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L160" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>logwin</code>(<strong><code>title</code></strong>, <strong><code>color</code></strong>)</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="quad_logs" class="doc_header"><code>quad_logs</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L161" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>quad_logs</code>()</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="simple" class="doc_header"><code>simple</code><a href="https://github.com/fastai/ghtop/tree/master/ghtop/ghtop.py#L178" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>simple</code>()</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
 
 </div>
     {% endraw %}
