@@ -13,6 +13,7 @@ index = {"term": "00_ghtop.ipynb",
          "seen": "00_ghtop.ipynb",
          "print_event": "00_ghtop.ipynb",
          "tail_events": "00_ghtop.ipynb",
+         "batch_events": "00_ghtop.ipynb",
          "watch_users": "00_ghtop.ipynb",
          "quad_logs": "00_ghtop.ipynb",
          "simple": "00_ghtop.ipynb"}
