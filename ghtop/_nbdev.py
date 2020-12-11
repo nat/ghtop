@@ -5,7 +5,6 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 index = {"term": "00_ghtop.ipynb",
          "logfile": "00_ghtop.ipynb",
          "github_auth_device": "00_ghtop.ipynb",
-         "token": "00_ghtop.ipynb",
          "limit_cb": "00_ghtop.ipynb",
          "api": "00_ghtop.ipynb",
          "fetch_events": "00_ghtop.ipynb",
