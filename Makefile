@@ -19,7 +19,7 @@ docs: $(SRC)
 	nbdev_build_docs
 	touch docs
 
-release: pypi conda_release
+release: pypi
 	nbdev_bump_version
 
 conda_release:
