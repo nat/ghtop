@@ -13,7 +13,7 @@ sync:
 	nbdev_update_lib
 
 docs_serve: docs
-	cd docs && JEKYLL_ENV=production bundle exec jekyll serve
+	cd docs && bundle exec jekyll serve
 
 docs: $(SRC)
 	nbdev_build_docs
