@@ -4,17 +4,13 @@ topnav_title: ghtop
 site_title: ghtop
 company_name: natfriedman
 description: A python library
-# Set to false to disable KaTeX math
-use_math: true
-# Add Google analytics id if you have one and want to use it here
+use_math: false
 google_analytics:
 # See http://nbdev.fast.ai/search for help with adding Search
 google_search:
 
 host: 127.0.0.1
-# the preview server used. Leave as is.
 port: 4000
-# the port where the preview is rendered.
 
 exclude:
   - .idea/
