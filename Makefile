@@ -2,7 +2,8 @@
 SHELL := /bin/bash
 SRC = $(wildcard ./*.ipynb)
 
-all: ghtop docs
+all:
+	echo not using nbdev at the moment
 
 ghtop: $(SRC)
 	nbdev_build_lib
@@ -17,9 +18,6 @@ docs_serve: docs
 docs: $(SRC)
 	nbdev_build_docs
 	touch docs
-
-test:
-	nbdev_test_nbs
 
 release: pypi conda_release
 	nbdev_bump_version

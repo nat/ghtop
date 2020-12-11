@@ -1,26 +1,42 @@
 # ghtop
 > See what's happening on GitHub in real time (also helpful if you need to use up your API quota as quickly as possible).
 
+`ghtop` provides a number of views of all current public activity from all users across the entire GitHub platform. (Note that GitHub delays all events by five minutes.)
+
+<img width="850" src="https://user-images.githubusercontent.com/56260/101270865-3f033780-3732-11eb-8dcc-97caf7cc58e6.png">
 
 ## Install
 
-`pip install ghtop`
+Either `pip install ghtop` or `conda install -c fastai ghtop`.
 
-<img width="983" alt="Screen Shot 2020-12-05 at 7 43 24 PM" src="https://user-images.githubusercontent.com/56260/101270865-3f033780-3732-11eb-8dcc-97caf7cc58e6.png">
+## How to use
 
-## How to use (This Will Change)
+Run `ghtop -h` to view the help. There are 4 views you can choose:
 
-Install the `emoji` and `enlighten` packages with pip to use this. Also whatever other packages you need – you'll figure it out.
+### `ghtop simple`
 
-Shared under the MIT license with :heart: by @nat
+A simple dump to your console of all events as they happen.
 
-```
-1+1
-```
+<img src="https://user-images.githubusercontent.com/346999/101861674-79e7df80-3b25-11eb-92d3-f888843f4aa2.png" width="500" align="left">
 
+### `ghtop tail`
 
+Like `simple`, but removes most bots, and only includes releases, issues and PRs (open, close, and comment events). A summary of the frequency of push events is also shown at the bottom of the screen.
 
+<img src="https://user-images.githubusercontent.com/346999/101861658-69376980-3b25-11eb-96ef-9d68f075abf7.png" width="700" align="left">
 
-    2
+### `ghtop quad`
 
+The same information as `tail`, but in a split window showing separately PRs, issues, pushes, and releases. This view does not remove bot activity.
 
+<img src="https://user-images.githubusercontent.com/346999/101861560-2ecdcc80-3b25-11eb-9fba-25382b2df65f.png" width="900" align="left">
+
+### `ghtop users`
+
+A summary of activity for the most active current users, including bots.
+
+<img src="https://user-images.githubusercontent.com/346999/101861612-4b6a0480-3b25-11eb-8124-19bb2434c27e.png" width="500" align="left">
+
+----
+
+Shared under the MIT license with ♥ by @nat
