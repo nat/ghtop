@@ -16,7 +16,8 @@ index = {"term": "00_ghtop.ipynb",
          "batch_events": "00_ghtop.ipynb",
          "watch_users": "00_ghtop.ipynb",
          "quad_logs": "00_ghtop.ipynb",
-         "simple": "00_ghtop.ipynb"}
+         "simple": "00_ghtop.ipynb",
+         "main": "00_ghtop.ipynb"}
 
 modules = ["ghtop.py"]
 
