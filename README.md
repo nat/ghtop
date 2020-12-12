@@ -4,4 +4,9 @@ See what's happening on GitHub in real time (also helpful if you need to use up 
 
 Install the `emoji` and `enlighten` packages with pip to use this. Also whatever other packages you need – you'll figure it out.
 
+To install the packages you can simply enter the following command:
+```
+pip install -r requirements.txt
+```
+
 Shared under the MIT license with :heart: by @nat 
