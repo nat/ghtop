@@ -39,10 +39,9 @@ def limit_cb(rem,quota):
 def _get_api():
     path = Path.home()/".ghtop_token"
     if path.is_file():
-        try: return path.read_text().strip()
+        try: token = path.read_text().strip()
         except: _exit("Error reading token")
-
-    token = github_auth_device()
+    else: token = github_auth_device()
     path.write_text(token)
     return GhApi(limit_cb=limit_cb, token=token)
 
