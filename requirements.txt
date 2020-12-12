@@ -1,9 +1,3 @@
 enlighten
 emoji
 requests
-blessed
-certifi
-urllib3
-idna
-six
-wcwidth
