@@ -1,9 +1,8 @@
 .ONESHELL:
 SHELL := /bin/bash
-SRC = $(wildcard ./*.ipynb)
+SRC = $(wildcard nbs/*.ipynb)
 
-all:
-	echo not using nbdev at the moment
+all: ghtop docs
 
 ghtop: $(SRC)
 	nbdev_build_lib

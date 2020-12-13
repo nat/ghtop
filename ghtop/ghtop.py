@@ -1,17 +1,24 @@
-__all__ = ['term', 'logfile', 'github_auth_device', 'limit_cb', 'api', 'fetch_events', 'Events', 'seen', 'print_event', 'tail_events', 'batch_events', 'watch_users', 'quad_logs', 'simple', 'main']
 
-import time, sys, signal, shutil, os, json, enlighten, emoji, blessed
+
+__all__ = ['term', 'logfile', 'github_auth_device', 'limit_cb', 'api', 'Events', 'print_event', 'tail_events',
+           'watch_users', 'quad_logs', 'simple', 'main']
+
+
+import sys, signal, shutil, os, json, emoji, enlighten
 from dashing import *
 from collections import defaultdict
+from warnings import warn
 from itertools import islice
 
 from fastcore.utils import *
 from fastcore.foundation import *
 from fastcore.script import *
-from ghapi.core import *
+from ghapi.all import *
+
 
 term = Terminal()
 logfile = Path("log.txt")
+
 
 def github_auth_device(wb='', n_polls=9999):
     "Authenticate with GitHub, polling up to `n_polls` times to wait for completion"
@@ -27,14 +34,17 @@ def github_auth_device(wb='', n_polls=9999):
     print("Authenticated with GitHub")
     return token
 
+
 def _exit(msg):
     print(msg, file=sys.stderr)
     sys.exit()
+
 
 def limit_cb(rem,quota):
     "Callback to warn user when close to using up hourly quota"
     w='WARNING '*7
     if rem < 1000: print(f"{w}\nRemaining calls: {rem} out of {quota}\n{w}", file=sys.stderr)
+
 
 def _get_api():
     path = Path.home()/".ghtop_token"
@@ -47,11 +57,6 @@ def _get_api():
 
 api = _get_api()
 
-def fetch_events(types=None):
-    "Generate an infinite stream of events optionally filtered to `types`"
-    while True:
-        yield from (o for o in api.activity.list_public_events() if not types or o.type in types)
-        time.sleep(0.2)
 
 Events = dict(
     IssuesEvent_closed=('⭐', 'closed', noop),
@@ -61,7 +66,6 @@ Events = dict(
     PullRequestEvent_closed=('✔', 'closed a pull request', term.green),
 )
 
-seen = set()
 
 def _to_log(e):
     login,repo,pay = e.actor.login,e.repo.name,e.payload
@@ -73,33 +77,27 @@ def _to_log(e):
         return color(f'{emoji} {login} {msg}{xtra} on repo {repo[:20]} ("{d.title[:50]}...")')
     elif e.type == "ReleaseEvent": return f'🚀 {login} released {e.payload.release.tag_name} of {repo}'
 
-def print_event(e, commits_counter):
-    if e.id in seen: return
-    seen.add(e.id)
-    login = e.actor.login
-    if "bot" in login or "b0t" in login: return  # Don't print bot activity (there is a lot!)
 
+def print_event(e, commits_counter):
     res = _to_log(e)
     if res: print(res)
     elif e.type == "PushEvent": [commits_counter.update() for c in e.payload.commits]
     elif e.type == "SecurityAdvisoryEvent": print(term.blink("SECURITY ADVISORY"))
 
-def tail_events():
+
+def tail_events(evt):
     "Print events from `fetch_events` along with a counter of push events"
     manager = enlighten.get_manager()
     commits = manager.counter(desc='Commits', unit='commits', color='green')
-    for ev in fetch_events(): print_event(ev, commits)
+    for ev in evt: print_event(ev, commits)
 
-def batch_events(size, types=None):
-    "Generate an infinite stream of batches of events of `size` optionally filtered to `types`"
-    while True: yield islice(fetch_events(types=types), size)
 
 def _pr_row(*its): print(f"{its[0]: <30} {its[1]: <6} {its[2]: <5} {its[3]: <6} {its[4]: <7}")
-def watch_users():
+def watch_users(evts):
     "Print a table of the users with the most events"
     users,users_events = defaultdict(int),defaultdict(lambda: defaultdict(int))
-    for xs in batch_events(10):
-        for x in xs:
+    while True:
+        for x in islice(evts, 10):
             users[x.actor.login] += 1
             users_events[x.actor.login][x.type] += 1
 
@@ -109,10 +107,11 @@ def watch_users():
         for u in sorted_users[:20]:
             _pr_row(*u, *itemgetter('PullRequestEvent','IssuesEvent','PushEvent')(users_events[u[0]]))
 
+
 def _push_to_log(e): return f"{e.actor.login} pushed {len(e.payload.commits)} commits to repo {e.repo.name}"
 def _logwin(title,color): return Log(title=title,border_color=2,color=color)
 
-def quad_logs():
+def quad_logs(evts):
     "Print 4 panels, showing most recent issues, commits, PRs, and releases"
     term.enter_fullscreen()
     ui = HSplit(VSplit(_logwin('Issues',        color=7), _logwin('Commits' , color=3)),
@@ -122,14 +121,16 @@ def quad_logs():
     for o in all_items: o.append(" ")
 
     d = dict(PushEvent=commits, IssuesEvent=issues, IssueCommentEvent=issues, PullRequestEvent=prs, ReleaseEvent=releases)
-    for xs in batch_events(10, types=d):
-        for x in xs:
+    while True:
+        for x in islice(evts, 10):
             f = [_to_log,_push_to_log][x.type == 'PushEvent']
-            d[x.type].append(f(x)[:95])
+            if x.type in d: d[x.type].append(f(x)[:95])
         ui.display()
 
-def simple():
-    for ev in fetch_events(): print(f"{ev.actor.login} {ev.type} {ev.repo.name}")
+
+def simple(evts):
+    for ev in evts: print(f"{ev.actor.login} {ev.type} {ev.repo.name}")
+
 
 def _signal_handler(sig, frame):
     if sig != signal.SIGINT: return
@@ -137,10 +138,19 @@ def _signal_handler(sig, frame):
     sys.exit(0)
 
 _funcs = dict(tail=tail_events, quad=quad_logs, users=watch_users, simple=simple)
+_filts = str_enum('_filts', 'user', 'repo', 'org')
 _OpModes = str_enum('_OpModes', *_funcs)
 
 @call_parse
-def main(mode: Param("Operation mode to run", _OpModes)):
+def main(mode:         Param("Operation mode to run", _OpModes),
+         include_bots: Param("Include bots (there's a lot of them!)", store_true)=False,
+         types:        Param("Comma-separated types of event to include (e.g PushEvent)", str)='',
+         filt:         Param("Filtering method", _filts)=None,
+         filtval:      Param("Value to filter by (for `repo` use format `owner/repo`)", str)=None):
     signal.signal(signal.SIGINT, _signal_handler)
-    _funcs[mode]()
-
+    types = types.split(',') if types else None
+    if filt and not filtval: _exit("Must pass `filter_value` if passing `filter_type`")
+    if filtval and not filt: _exit("Must pass `filter_type` if passing `filter_value`")
+    kwargs = {filt:filtval} if filt else {}
+    evts = api.fetch_events(types=types, incl_bot=include_bots, **kwargs)
+    _funcs[mode](evts)
