@@ -4,7 +4,7 @@ __all__ = ['term', 'logfile', 'github_auth_device', 'limit_cb', 'api', 'Events',
            'watch_users', 'quad_logs', 'simple', 'main']
 
 
-import time, sys, signal, shutil, os, json, enlighten, emoji, blessed
+import sys, signal, shutil, os, json, emoji, enlighten
 from dashing import *
 from collections import defaultdict
 from warnings import warn
