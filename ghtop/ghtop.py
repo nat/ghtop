@@ -18,8 +18,6 @@ from .richext import *
 from .all_rich import (Console, Color, FixedPanel, box, Segments, Live,
                             grid, ConsoleOptions, Progress, BarColumn, Spinner, Table)
 
-
-
 ETYPES=PushEvent,PullRequestEvent,IssuesEvent,ReleaseEvent
 
 def get_sparklines():

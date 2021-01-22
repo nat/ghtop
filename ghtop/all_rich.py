@@ -82,4 +82,3 @@ class FixedPanel(Panel, GetAttr):
 def add(self, s:str, **kwargs):
     "Add styled `s` to panel"
     self.append(text(s, **kwargs))
-
