@@ -1,15 +1,14 @@
 
 
-__all__ = ['get_sparklines', 'ETYPES', 'term', 'tdim', 'limit_cb', 'Events', 'print_event', 'pct_comp', 'tail_events',
-           'watch_users', 'quad_logs', 'simple', 'main']
+__all__ = ['get_sparklines', 'ETYPES', 'term', 'tdim', 'limit_cb', 'pct_comp', 'tail_events', 'watch_users',
+           'quad_logs', 'simple', 'main']
 
 
-import sys, signal, shutil, os, json, emoji, enlighten
-from dashing import *
+import sys, signal, shutil, os, json
+# from dashing import *
 from collections import defaultdict
 from warnings import warn
 from itertools import islice
-
 from fastcore.utils import *
 from fastcore.foundation import *
 from fastcore.script import *
@@ -17,6 +16,8 @@ from ghapi.all import *
 from .richext import *
 from .all_rich import (Console, Color, FixedPanel, box, Segments, Live,
                             grid, ConsoleOptions, Progress, BarColumn, Spinner, Table)
+
+
 
 ETYPES=PushEvent,PullRequestEvent,IssuesEvent,ReleaseEvent
 
@@ -30,7 +31,7 @@ def get_sparklines():
     return Stats([s1,s2,s3,s4,s5], store=5, span=5, spn_lbl='5/s', show_freq=True)
 
 
-term = Terminal()
+term = Console()
 
 tdim = L(os.popen('stty size', 'r').read().split())
 if not tdim: theight,twidth = 15,15
@@ -46,33 +47,6 @@ def limit_cb(rem,quota):
     "Callback to warn user when close to using up hourly quota"
     w='WARNING '*7
     if rem < 1000: print(f"{w}\nRemaining calls: {rem} out of {quota}\n{w}", file=sys.stderr)
-
-
-Events = dict(
-    IssuesEvent_closed=('⭐', 'closed', noop),
-    IssuesEvent_opened=('📫', 'opened', noop),
-    IssueCommentEvent=('💬', 'commented on', term.white),
-    PullRequestEvent_opened=('✨', 'opened a pull request', term.yellow),
-    PullRequestEvent_closed=('✔', 'closed a pull request', term.green),
-)
-
-
-def _to_log(e):
-    login,repo,pay = e.actor.login,e.repo.name,e.payload
-    typ = e.type + (f'_{pay.action}' if e.type in ('PullRequestEvent','IssuesEvent') else '')
-    emoji,msg,color = Events.get(typ, [0]*3)
-    if emoji:
-        xtra = '' if e.type == "PullRequestEvent" else f' issue # {pay.issue.number}'
-        d = try_attrs(pay, "pull_request", "issue")
-        return color(f'{emoji} {login} {msg}{xtra} on repo {repo[:20]} ("{d.title[:50]}...")')
-    elif e.type == "ReleaseEvent": return f'🚀 {login} released {e.payload.release.tag_name} of {repo}'
-
-
-def print_event(e, counter):
-    res = _to_log(e)
-    if res: print(res)
-    elif counter and e.type == "PushEvent": [counter.update() for c in e.payload.commits]
-    elif e.type == "SecurityAdvisoryEvent": print(term.blink("SECURITY ADVISORY"))
 
 
 def pct_comp(api): return int(((5000-int(api.limit_rem)) / 5000) * 100)
@@ -163,7 +137,7 @@ def _get_token():
 
 def _signal_handler(sig, frame):
     if sig != signal.SIGINT: return
-    print(term.exit_fullscreen(),term.clear(),term.normal)
+    term.clear()
     sys.exit(0)
 
 _funcs = dict(tail=tail_events, quad=quad_logs, users=watch_users, simple=simple)
