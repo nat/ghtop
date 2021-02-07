@@ -5,7 +5,6 @@ __all__ = ['get_sparklines', 'ETYPES', 'term', 'tdim', 'limit_cb', 'pct_comp', '
 
 
 import sys, signal, shutil, os, json
-# from dashing import *
 from collections import defaultdict
 from warnings import warn
 from itertools import islice
